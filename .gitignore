@@ -1,2 +1,47 @@
-node_modules
-.env
+# === Flutter & Dart ===
+.dart_tool/
+.packages
+.pub/
+.pub-cache/
+build/
+
+# === IDEs ===
+.vscode/
+.idea/
+*.iml
+
+# === Android ===
+android/.gradle/
+android/local.properties
+android/**/key.properties
+*.keystore
+*.jks
+
+# === iOS / macOS ===
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/App.framework
+ios/Flutter/engine/
+ios/Flutter/Flutter.xcframework
+
+macos/Pods/
+macos/Flutter/ephemeral/
+
+# === Web ===
+web/.dart_tool/
+web/build/
+
+# === Windows ===
+windows/flutter/ephemeral/
+
+# === Linux ===
+linux/flutter/ephemeral/
+
+# === Logs & OS ===
+*.log
+.DS_Store
+Thumbs.db
