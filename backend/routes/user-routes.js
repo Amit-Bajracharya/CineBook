@@ -16,3 +16,5 @@ userRoute.put('/:id', updateUser)
 
 //DELETE USER
 userRoute.delete('/:id', deleteUser)
+
+module.exports = userRoutes
