@@ -1,9 +1,52 @@
 const userModel = require('../models/userModel.js')
+const bcrypt = require('bcryptjs')
+const loginUser = async(req, res)=>{
+  try{
+    const {email , password} = req.body
+    if(!email || !password){
+      return res.status(401).json({
+        success: false,
+        data : "Email and password entered are incorrect. Please try again"
+      })
+    
+    }
+     const user = await userModel.findOne({email})
+     if(!user){
+      return res.status(400).json({
+        success: false, 
+        data : "Unable to find the user"
+      })
 
+      
+     }
+     const isMatch = await bcrypt.compare(password, user.password)
+     if(!isMatch){
+      return res.status(401).json({
+        success: false,
+        data: "Password don't match"
+      })
+     }
+  }
+
+  catch(err){
+    res.status(401).json({
+      succes: false,
+      data : err.message
+    })
+  }
+}
 //ADD USER FUNCTION
 const addUser = async(req, res)=>{
   try{
-    const addUser = await userModel.create(req.body)
+  
+    const hashedpassword = await bcrypt.hash(req.body.password, 10)
+    const user ={
+      username: req.body.username,
+      email: req.body.email,
+      password : hashedpassword,
+      phone_number : req.body.phone_number
+    }
+      const addUser = await userModel.create(user)
     if(!addUser){
       return res.status(401).json({
         success: false, 

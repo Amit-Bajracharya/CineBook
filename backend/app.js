@@ -3,30 +3,16 @@ const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
 const port = process.env.PORT;
-
+const userRoutes = require('./routes/user-routes.js')
 //EXPORT MODELS
-const userModel = require('./models/userModel.js')
 
+
+app.use('/user/api', userRoutes)
 app.get("/", (req, res) => {
   res.send("This is the home page");
 });
 
-//ADD THE USER TO DATABASE
-app.post('/user/api', )
-//GET BY ID
-app.get('/user/api/:id', )
 
-
-
-//GET ALL USER
-app.get('/user/api')
-
-//UPDATE USER BY ID
-app.put('/user/api/:id', )
-
-//DELETE USER
-app.delete('/user/api/:id', 
-  )
 
 
 mongoose
