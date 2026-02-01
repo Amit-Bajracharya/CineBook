@@ -12,27 +12,7 @@ app.get("/", (req, res) => {
 });
 
 //ADD THE USER TO DATABASE
-app.post('/user/api', async(req, res)=>{
-  try{
-    const addUser = await userModel.create(req.body)
-    if(!addUser){
-      return res.status(401).json({
-        success: false, 
-        data : "Unable to add the user"
-      })
-    }
-      return res.statis(200).json({
-        success: true,
-        data : addUser
-      })
-    
-  }catch(err){
-    res.status(401).json({
-      success : false,
-      data: err.message
-    })
-  }
-})
+app.post('/user/api', )
 //GET BY ID
 app.get('/user/api/:id', async(req, res)=>{
   try{
