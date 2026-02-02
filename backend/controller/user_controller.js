@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel.js')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const loginUser = async(req, res)=>{
   try{
     const {email , password} = req.body
@@ -26,8 +27,31 @@ const loginUser = async(req, res)=>{
         data: "Password don't match"
       })
      }
-  }
+      const payload ={
+      userId: user._id,
+      email: user.email,
+    }
 
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn:'15m'})
+    const refreshToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, {expiresIn:'7d'})
+
+    // Save refresh token to database
+    await user.findByIdAndUpdate(user._id, { refreshToken: refreshToken }) // fixed variable name conflict
+
+        const userResponse = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    }
+    
+    res.status(200).json({ 
+      success: true, 
+      data: {
+        user: userResponse,
+        token: accessToken,
+        refreshToken: refreshToken
+      }
+    })}
   catch(err){
     res.status(401).json({
       succes: false,
