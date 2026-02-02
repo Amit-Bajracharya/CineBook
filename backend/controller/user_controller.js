@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel.js')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const loginUser = async(req, res)=>{
   try{
     const {email , password} = req.body
