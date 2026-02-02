@@ -77,7 +77,7 @@ const addUser = async(req, res)=>{
         data : "Unable to add the user"
       })
     }
-      return res.statis(200).json({
+      return res.status(200).json({
         success: true,
         data : addUser
       })
@@ -93,14 +93,14 @@ const addUser = async(req, res)=>{
 //UPDATE THE USER
 const updateUser = async (req, res)=>{
    try {
-     const  {id} = req.body.id
+     const {id} = req.params
      if(!id){
        return res.status(401).json({
          success: false,
          data :"Id not found"
        })
      }
-       const updateUser = await userModel.findByIdAndUpdate(id)
+       const updateUser = await userModel.findByIdAndUpdate(id, req.body, {new: true})
        if(!updateUser){
          return res.status(401).json({
            success: false, 
@@ -123,7 +123,7 @@ const updateUser = async (req, res)=>{
 //DELETE USER
 const deleteUser = async (req, res)=>{
     try{
-      const {id} = req.body.id
+      const {id} = req.params
       if(!id){
        return res.status(401).json({
          success: false,
@@ -137,7 +137,7 @@ const deleteUser = async (req, res)=>{
         data : "Unable to delete user"
       })
     }
-    return res.status(200).josn({
+    return res.status(200).json({
       success: true,
       data : "Successfully deleted the User"
     })
@@ -145,7 +145,7 @@ const deleteUser = async (req, res)=>{
 catch(err){
        res.status(400).json({
         success: false, 
-        data: error.message
+        data: err.message
      })
     }
   }
@@ -153,7 +153,7 @@ catch(err){
 // GET USER BY ID
 const getUserById = async(req, res)=>{
   try{
-    const {id} = req.body.id;
+    const {id} = req.params
     if(!id){
       return res.status(401).json({
         success: false,
@@ -169,12 +169,12 @@ const getUserById = async(req, res)=>{
       })
     }
     return res.status(200).json({
-      success: false,
+      success: true,
       data : getUser
     })
   }catch(err){
-    res.status(200).json({
-      success: true, 
+    res.status(400).json({
+      success: false, 
       data : err.message
     })
   }
@@ -196,7 +196,10 @@ const getAllUsers =  async(req, res)=>{
         data: "No User found "
       })
     }
-    
+    return res.status(200).json({
+      success: true,
+      data: fetchUser
+    })
   }catch(err){
     res.status(401).json({
       success : false,
@@ -204,4 +207,4 @@ const getAllUsers =  async(req, res)=>{
     })
   }
 }
-module.exports = {addUser, deleteUser, getAllUsers, getUserById, updateUser}
+module.exports = {addUser, deleteUser, getAllUsers, getUserById, updateUser, loginUser}

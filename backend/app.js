@@ -4,9 +4,10 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const port = process.env.PORT;
 const userRoutes = require('./routes/user-routes.js')
+
 //EXPORT MODELS
 
-
+app.use(express.json())
 app.use('/user/api', userRoutes)
 app.get("/", (req, res) => {
   res.send("This is the home page");
@@ -16,7 +17,10 @@ app.get("/", (req, res) => {
 
 
 mongoose
-  .connect(process.env.DATABASE_URL)
+  .connect(process.env.DATABASE_URL, {
+    retryWrites: true,
+    w: 'majority'
+  })
   .then(() => {
     console.log("Connected to database");
 
