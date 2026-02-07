@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark, 
-          primary: Color(0xFFE50914), 
+          primary: Colors.amber, 
           onPrimary: Colors.white, 
           secondary: Color(0xFF1F1F1F), 
           onSecondary: Colors.white70, 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           )
         ),
       ),
-      home: LandingPage(),
+      home: Homepage(),
     );
   }
 }

@@ -21,6 +21,7 @@ class _LandingPageState extends State<LandingPage> {
     'assets/images/movie2.jpg',
     'assets/images/movie3.jpg',
     'assets/images/movie4.jpeg',
+    'assets/images/movie5.jpg',
   ];
 
   @override
