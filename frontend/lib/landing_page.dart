@@ -1,4 +1,4 @@
-import 'package:cinebooknew/loginPage/pagelogin.dart';
+import 'package:cinebooknew/home/loginPage/pagelogin.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'dart:math' as math;
@@ -135,7 +135,7 @@ class _LandingPageState extends State<LandingPage> {
         // Second page with background image
         PageViewModel(
           decoration: PageDecoration(
-            pageColor: Colors.transparent,
+  
             imagePadding: EdgeInsets.zero,  // Remove all padding
             contentMargin: EdgeInsets.zero,  // Remove content margin
             footerPadding: EdgeInsets.zero,  // Remove footer padding
