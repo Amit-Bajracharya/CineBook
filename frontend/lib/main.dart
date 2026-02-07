@@ -1,6 +1,6 @@
 import 'package:cinebooknew/home/homepage.dart';
 import 'package:cinebooknew/landing_page.dart';
-import 'package:cinebooknew/loginPage/pagelogin.dart';
+import 'package:cinebooknew/home/loginPage/pagelogin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           )
         ),
       ),
-      home: Homepage(),
+      home: LandingPage(),
     );
   }
 }
