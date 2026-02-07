@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/api_service.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -121,12 +122,35 @@ class _LoginpageState extends State<Loginpage> {
               const SizedBox(height: 30),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print("Username: ${username.text}");
-                    print("Email: ${email.text}");
-                    print("Password: ${password.text}");
-                    print("Phone: ${phone.text}");
+                    // Show loading indicator
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Creating user...')),
+                    );
+
+                    // Call API to create user
+                    final result = await ApiService.createUser(
+                      username: username.text,
+                      email: email.text,
+                      password: password.text,
+                      phone_number: phone.text,
+                    );
+
+                    if (result['success']) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('User created successfully!')),
+                      );
+                      // Clear form
+                      username.clear();
+                      email.clear();
+                      password.clear();
+                      phone.clear();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error: ${result['error'] ?? result['data']}')),
+                      );
+                    }
                   }
                 },
                 child: const Text("Submit"),
