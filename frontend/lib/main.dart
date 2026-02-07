@@ -1,5 +1,6 @@
+import 'package:cinebooknew/loginPage/loginPage.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/loginPage/loginPage.dart';
+
 
 void main() {
   runApp(const MyApp());

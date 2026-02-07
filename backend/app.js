@@ -12,10 +12,6 @@ app.use('/user/api', userRoutes)
 app.get("/", (req, res) => {
   res.send("This is the home page");
 });
-
-
-
-
 mongoose
   .connect(process.env.DATABASE_URL, {
     retryWrites: true,
