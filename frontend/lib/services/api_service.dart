@@ -3,7 +3,7 @@ import 'dart:convert';
 
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.8:5000/user/api'; // Replace with your IP
+  static const String baseUrl = 'http://192.168.1.11:5000/user/api'; // Replace with your IP
 
   static Future<Map<String, dynamic>> createUser({
       required String username,
@@ -12,6 +12,7 @@ class ApiService {
       required String phone_number,
   })async{
     try{
+      print('Starting API call to: $baseUrl');
       final response = await http.post(
         Uri.parse(baseUrl),
         headers: {
@@ -22,9 +23,11 @@ class ApiService {
           'email': email,
           'password':  password,
           'phone_number' : phone_number
-
         }),
-      );
+      ).timeout(const Duration(seconds: 10)); // Add timeout
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
 
       if(response.statusCode == 200){
         final responseData = jsonDecode(response.body);
@@ -41,9 +44,10 @@ class ApiService {
         };
       }
     }catch(err){
+      print('Exception caught: $err'); // Debug print
       return {
         'success': false, 
-        'data' :  'Network Error: $err' 
+        'error' :  'Network Error: $err' 
       };
     }
   }
