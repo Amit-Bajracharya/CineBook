@@ -1,4 +1,3 @@
-import 'package:cinebooknew/home/homepage.dart';
 import 'package:cinebooknew/loginPage/pagelogin.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -133,9 +132,14 @@ class _LandingPageState extends State<LandingPage> {
           ),
         ),
 
-        // Second page
+        // Second page with background image
         PageViewModel(
           decoration: PageDecoration(
+            pageColor: Colors.transparent,
+            imagePadding: EdgeInsets.zero,  // Remove all padding
+            contentMargin: EdgeInsets.zero,  // Remove content margin
+            footerPadding: EdgeInsets.zero,  // Remove footer padding
+            fullScreen: true,  // Make it fullscreen
             bodyFlex: 3,
             imageFlex: 3,
             boxDecoration: BoxDecoration(
@@ -149,12 +153,13 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
           ),
-
           titleWidget: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
             child: Text(
               "Fast and Reliable",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+              ),
             ),
           ),
           bodyWidget: Container(
@@ -174,7 +179,7 @@ class _LandingPageState extends State<LandingPage> {
       onDone: () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Homepage()),
+          MaterialPageRoute(builder: (context) => Loginpage()),
         );
       },
       showSkipButton: true,
